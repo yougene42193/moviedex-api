@@ -6,8 +6,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 const MOVIES = require('./movies.json');
 
-console.log(process.env.API_TOKEN);
-
 const app = express();
 
 app.use(morgan('dev'));
@@ -58,6 +56,18 @@ app.use(function validateBearerToken(req, res, next) {
   }
   next();
 });
+
+function handleGetGenre(req, res) {
+  res.json(validGenres);
+}
+
+app.get('/genre', handleGetGenre);
+
+function handleGetCountries(req, res) {
+  res.json(validCountries);
+}
+
+app.get('/country', handleGetCountries);
 
 function handleMovie(req, res) {
   let response = MOVIES;
